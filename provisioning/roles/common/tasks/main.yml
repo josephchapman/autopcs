@@ -1,0 +1,18 @@
+---
+- name: 'Packages: Install'
+  yum: name={{ item }} state=latest
+  with_items:
+    - policycoreutils-python
+
+- name: 'Services: Start and Enable'
+  systemd:
+    name: firewalld
+    state: started
+    enabled: yes
+    masked: no
+
+
+# update and reboot
+# install chrony
+# systemctl enable& start chronyd
+# configure firewall
