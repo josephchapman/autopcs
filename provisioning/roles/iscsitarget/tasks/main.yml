@@ -1,19 +1,19 @@
 ---
-- name: 'Install httpd'
+- name: 'Install targetcli'
   yum:
-    name: httpd
+    name: targetcli.noarch
     state: latest
 
-- name: 'Start and Enable httpd'
+- name: 'Start and Enable target.service'
   systemd:
-    name: httpd
+    name: target.service
     state: started
     enabled: yes
     masked: no
 
-- name: 'Firewalld: Open http'
+- name: 'Firewalld: Open 3260/tcp'
   firewalld:
-    service: http
+    port: 3260/tcp
     permanent: true
     state: enabled
     immediate: yes

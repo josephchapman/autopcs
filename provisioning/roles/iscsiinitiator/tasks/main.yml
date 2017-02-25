@@ -1,0 +1,18 @@
+---
+- name: 'Install iscsi-initiator-utils.x86_64'
+  yum:
+    name: iscsi-initiator-utils.x86_64
+    state: latest
+
+# - name: 'Set initiator name'
+#   template:
+
+
+- name: 'Start and Enable iscsid.service'
+  systemd:
+    name: iscsid.service
+    state: started
+    enabled: yes
+    masked: no
+
+# - name: 'iscsiadm'

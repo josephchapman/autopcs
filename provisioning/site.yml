@@ -1,18 +1,19 @@
 ---
-- name: apply common configuration to all nodes
+- name: common
   hosts: all
   become: yes
   roles:
     - common
 
-# - name: target
-#   hosts: iscsitarget
-#   become: yes
-#   roles:
-#    - iscsitarget
+- name: target
+  hosts: iscsi
+  become: yes
+  roles:
+    - iscsitarget
 
-# - name: initiators
-#   hosts: iscsiinitiators
-#   become: yes
-#   roles:
-#     - iscsiinitiator
+- name: initiators
+  hosts: pcs1 pcs2
+  become: yes
+  roles:
+    - iscsiinitiator
+#    - pcsstuff
