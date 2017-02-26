@@ -1,0 +1,5 @@
+---
+- name: 'restart iscsid.service'
+  systemd:
+    name: iscsid.service
+    state: restarted

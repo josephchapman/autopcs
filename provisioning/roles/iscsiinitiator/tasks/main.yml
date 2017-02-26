@@ -4,9 +4,8 @@
     name: iscsi-initiator-utils.x86_64
     state: latest
 
-# - name: 'Set initiator name'
-#   template:
-
+- name: 'Set initiatorname'
+  shell: echo 'InitiatorName=iqn.2017-01.com.pcs:'$(hostname) > /etc/iscsi/initiatorname.iscsi
 
 - name: 'Start and Enable iscsid.service'
   systemd:
@@ -15,4 +14,8 @@
     enabled: yes
     masked: no
 
-# - name: 'iscsiadm'
+- name: 'Discover target'
+  command: iscsiadm --mode discoverydb --type sendtargets --portal 192.168.30.10 --discover
+
+- name: 'Login to target'
+  command: iscsiadm --mode node --targetname iqn.2017-01.com.pcs:iscsi --portal 192.168.30.10:3260 --login

@@ -1,0 +1,2 @@
+iscsiadm --mode discoverydb --type sendtargets --portal 192.168.30.10 --discover
+iscsiadm --mode node --targetname iqn.2017-01.com.pcs:iscsi --portal 192.168.30.10:3260 --login

@@ -17,3 +17,14 @@
     permanent: true
     state: enabled
     immediate: yes
+
+- name: 'configure target'
+  shell: |
+    /bin/targetcli set global auto_add_default_portal=false
+    /bin/targetcli /backstores/fileio create file_or_dev=/home/vagrant/file size=10M name=file
+    /bin/targetcli /iscsi create wwn=iqn.2017-01.com.pcs:iscsi
+    /bin/targetcli /iscsi/iqn.2017-01.com.pcs:iscsi/tpg1/acls create wwn=iqn.2017-01.com.pcs:pcs1
+    /bin/targetcli /iscsi/iqn.2017-01.com.pcs:iscsi/tpg1/acls create wwn=iqn.2017-01.com.pcs:pcs2
+    /bin/targetcli /iscsi/iqn.2017-01.com.pcs:iscsi/tpg1/luns create storage_object=/backstores/fileio/file
+    /bin/targetcli /iscsi/iqn.2017-01.com.pcs:iscsi/tpg1/portals create ip_address=192.168.30.10 ip_port=3260
+    /bin/targetcli saveconfig
